@@ -1,0 +1,8 @@
+class CreateIndustriousTasks < ActiveRecord::Migration
+  def change
+    create_table :industrious_tasks do |table|
+      table.string :description, null: false
+      table.string :type, null: false
+    end
+  end
+end

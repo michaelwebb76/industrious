@@ -1,6 +1,6 @@
 require 'industrious/version'
+require 'industrious/models'
 require 'generators/migration_generator'
-require 'models'
 
 module Industrious
   def self.root
