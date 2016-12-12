@@ -1,0 +1,9 @@
+require 'industrious/version'
+require 'generators/migration_generator'
+require 'models'
+
+module Industrious
+  def self.root
+    File.expand_path '../..', __FILE__
+  end
+end
