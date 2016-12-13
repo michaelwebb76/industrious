@@ -1,0 +1,10 @@
+class CreateIndustriousSequences < ActiveRecord::Migration
+  def change
+    create_table :industrious_sequences do |table|
+      table.integer :from_task_id, null: false
+      table.integer :to_task_id, null: false
+    end
+    add_foreign_key :industrious_sequences, :industrious_tasks, column: :from_task_id
+    add_foreign_key :industrious_sequences, :industrious_tasks, column: :to_task_id
+  end
+end
