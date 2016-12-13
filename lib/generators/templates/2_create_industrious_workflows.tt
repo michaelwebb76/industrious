@@ -1,10 +1,8 @@
 class CreateIndustriousWorkflows < ActiveRecord::Migration
   def change
     create_table :industrious_workflows do |table|
+      table.string :title, null: false
       table.string :description, null: false
-      table.integer :initial_task_id, null: false
     end
-
-    add_index :industrious_workflows, :initial_task_id
   end
 end

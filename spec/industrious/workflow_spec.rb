@@ -4,8 +4,7 @@ module Industrious
   describe Workflow do
     describe 'workflow can be created' do
       subject(:workflow) do
-        task = Task.create(description: 'TEST', type: 'Industrious::Task')
-        described_class.new(description: 'TEST', initial_task: task)
+        described_class.new(title: 'TEST', description: 'TEST')
       end
 
       it { is_expected.to be_valid }
