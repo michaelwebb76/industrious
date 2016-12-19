@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Industrious
   class ApplicationRecord < ActiveRecord::Base
     self.abstract_class = true

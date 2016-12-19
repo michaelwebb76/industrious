@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 module Industrious
@@ -7,7 +8,7 @@ module Industrious
 
     describe 'process can be created' do
       subject(:process) do
-        described_class.new(workflow: workflow, data_identifier: 123, started: Time.now)
+        described_class.new(workflow: workflow, data_identifier: 123, started: Time.zone.now)
       end
 
       it { is_expected.to be_valid }

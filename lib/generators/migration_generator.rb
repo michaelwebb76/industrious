@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'thor'
 
 module Industrious
@@ -15,7 +16,7 @@ module Industrious
           .each do |migration, destination_file_name_with_rb_ext|
             # this to make sure that the migrations have different timestamps
             sleep 1.1
-            timestamp = Time.now.strftime('%Y%m%d%H%M%S')
+            timestamp = Time.zone.now.strftime('%Y%m%d%H%M%S')
             destination_path = File.join(
               migrations_path,
               "#{timestamp}_#{destination_file_name_with_rb_ext}"

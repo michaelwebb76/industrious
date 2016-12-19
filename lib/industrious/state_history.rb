@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Industrious
   class StateHistory < ApplicationRecord
     belongs_to :process

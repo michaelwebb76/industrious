@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rubygems'
 require 'rspec'
 require 'pry'
@@ -6,6 +7,8 @@ require 'industrious'
 ROOT = Pathname(File.expand_path(File.join(File.dirname(__FILE__), '..')))
 
 $LOAD_PATH << File.join(ROOT, 'lib')
+
+Time.zone = 'Melbourne'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

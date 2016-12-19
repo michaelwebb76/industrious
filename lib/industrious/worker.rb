@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Industrious
   class Worker
     attr_reader :work_done
@@ -29,15 +30,17 @@ module Industrious
       StateHistory.create!(process: process,
                            task: task,
                            started: state.created_at,
-                           finished: Time.now)
+                           finished: Time.zone.now)
+      update_process_state(task)
+      state.destroy!
+    end
 
+    def update_process_state(task)
       next_sequences = workflow.sequences_from(task)
       next_sequences.each do |sequence|
         states.create!(process: process, task_id: sequence.to_task_id)
       end
-      process.update_attributes(finished: Time.now) if next_sequences.empty?
-
-      state.destroy!
+      process.update_attributes(finished: Time.zone.now) if next_sequences.empty?
     end
   end
 end

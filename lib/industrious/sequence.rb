@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Industrious
   class Sequence < ApplicationRecord
     belongs_to :workflow

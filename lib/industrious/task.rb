@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Industrious
   class Task < ApplicationRecord
     validates :description, presence: true

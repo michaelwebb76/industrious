@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Industrious
   class Process < ApplicationRecord
     belongs_to :workflow
@@ -10,7 +11,8 @@ module Industrious
 
     def self.start(workflow, data_identifier)
       raise 'Workflow invalid!' unless workflow.sequence_valid?
-      process = create!(workflow: workflow, data_identifier: data_identifier, started: Time.now)
+      process = create!(workflow: workflow, data_identifier: data_identifier,
+                        started: Time.zone.now)
       State.create!(process: process, task: Task.find(workflow.starting_point_task_id))
       process
     end

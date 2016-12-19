@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 module Industrious
@@ -7,7 +8,7 @@ module Industrious
         workflow = Workflow.create(title: 'TEST', description: 'TEST')
         process = Process.create(workflow: workflow, data_identifier: 123)
         task = Task.create(type: 'Industrious::Task', description: 'TEST')
-        now = Time.new
+        now = Time.zone.now
         described_class.new(process: process, task: task, started: now, finished: now)
       end
 

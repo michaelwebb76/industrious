@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Industrious
   class Workflow < ApplicationRecord
     validates :title, presence: true, uniqueness: true
