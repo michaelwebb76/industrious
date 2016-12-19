@@ -30,4 +30,13 @@ RSpec.configure do |config|
     end
     silence_stream(STDOUT, &setup_sqlite_db)
   end
+
+  config.before(:each) do
+    Industrious::Task.delete_all
+    Industrious::Workflow.delete_all
+    Industrious::Sequence.delete_all
+    Industrious::Process.delete_all
+    Industrious::State.delete_all
+    Industrious::StateHistory.delete_all
+  end
 end

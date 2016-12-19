@@ -1,0 +1,12 @@
+class CreateIndustriousStateHistories < ActiveRecord::Migration
+  def change
+    create_table :industrious_state_histories do |table|
+      table.integer :process_id, null: false
+      table.integer :task_id, null: false
+      table.datetime :started, null: false
+      table.datetime :finished, null: false
+    end
+    add_foreign_key :industrious_state_histories, :industrious_processes, column: :process_id
+    add_foreign_key :industrious_state_histories, :industrious_tasks, column: :task_id
+  end
+end
