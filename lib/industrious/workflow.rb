@@ -16,6 +16,11 @@ module Industrious
       start_point_task_ids.first
     end
 
+    def sequences_from(task)
+      sequences.load
+      sequences.select { |sequence| sequence.from_task_id == task.id }
+    end
+
     private
 
     def start_point_task_ids

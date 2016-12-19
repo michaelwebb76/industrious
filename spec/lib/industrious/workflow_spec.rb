@@ -41,5 +41,28 @@ module Industrious
         it { is_expected.to be true }
       end
     end
+
+    describe '#sequences_from' do
+      subject(:sequences_from) { workflow.sequences_from(first_task) }
+
+      before { workflow.save! }
+
+      context 'no sequences' do
+        it { is_expected.to eq [] }
+      end
+
+      context 'sequence exists' do
+        let(:first_sequence) do
+          Sequence.create(workflow: workflow, from_task: first_task, to_task: second_task)
+        end
+
+        before do
+          first_sequence
+          Sequence.create!(workflow: workflow, from_task: second_task, to_task: third_task)
+        end
+
+        it { is_expected.to eq [first_sequence] }
+      end
+    end
   end
 end
