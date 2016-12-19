@@ -4,9 +4,10 @@ module Industrious
   describe Sequence do
     describe 'sequence can be created' do
       subject(:sequence) do
+        workflow = Workflow.new(title: 'TEST', description: 'TEST')
         first_task = Task.new(description: 'TEST 1', type: 'Industrious::Task')
         second_task = Task.new(description: 'TEST 2', type: 'Industrious::Task')
-        described_class.new(from_task: first_task, to_task: second_task)
+        described_class.new(workflow: workflow, from_task: first_task, to_task: second_task)
       end
 
       it { is_expected.to be_valid }

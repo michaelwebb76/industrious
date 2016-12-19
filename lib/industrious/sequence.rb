@@ -1,5 +1,6 @@
 module Industrious
   class Sequence < ApplicationRecord
+    belongs_to :workflow
     belongs_to :from_task, class_name: Task
     belongs_to :to_task, class_name: Task
 
