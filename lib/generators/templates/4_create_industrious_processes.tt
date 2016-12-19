@@ -1,0 +1,9 @@
+class CreateIndustriousProcesses < ActiveRecord::Migration
+  def change
+    create_table :industrious_processes do |table|
+      table.integer :workflow_id, null: false
+      table.integer :data_identifier, null: false
+    end
+    add_foreign_key :industrious_processes, :industrious_workflows, column: :workflow_id
+  end
+end
