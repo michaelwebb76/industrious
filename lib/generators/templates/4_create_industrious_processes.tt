@@ -3,6 +3,8 @@ class CreateIndustriousProcesses < ActiveRecord::Migration
     create_table :industrious_processes do |table|
       table.integer :workflow_id, null: false
       table.integer :data_identifier, null: false
+      table.datetime :created_at, null: false
+      table.datetime :updated_at, null: false
     end
     add_foreign_key :industrious_processes, :industrious_workflows, column: :workflow_id
   end

@@ -3,6 +3,8 @@ class CreateIndustriousWorkflows < ActiveRecord::Migration
     create_table :industrious_workflows do |table|
       table.string :title, null: false
       table.string :description, null: false
+      table.datetime :created_at, null: false
+      table.datetime :updated_at, null: false
     end
   end
 end

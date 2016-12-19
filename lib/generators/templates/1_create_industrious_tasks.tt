@@ -3,6 +3,8 @@ class CreateIndustriousTasks < ActiveRecord::Migration
     create_table :industrious_tasks do |table|
       table.string :description, null: false
       table.string :type, null: false
+      table.datetime :created_at, null: false
+      table.datetime :updated_at, null: false
     end
   end
 end

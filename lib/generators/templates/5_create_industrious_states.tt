@@ -3,6 +3,8 @@ class CreateIndustriousStates < ActiveRecord::Migration
     create_table :industrious_states do |table|
       table.integer :process_id, null: false
       table.integer :task_id, null: false
+      table.datetime :created_at, null: false
+      table.datetime :updated_at, null: false
     end
     add_foreign_key :industrious_states, :industrious_processes, column: :process_id
     add_foreign_key :industrious_states, :industrious_tasks, column: :task_id
