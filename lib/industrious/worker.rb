@@ -31,9 +31,11 @@ module Industrious
                            started: state.created_at,
                            finished: Time.now)
 
-      workflow.sequences_from(task).each do |sequence|
+      next_sequences = workflow.sequences_from(task)
+      next_sequences.each do |sequence|
         states.create!(process: process, task_id: sequence.to_task_id)
       end
+      process.update_attributes(finished: Time.now) if next_sequences.empty?
 
       state.destroy!
     end

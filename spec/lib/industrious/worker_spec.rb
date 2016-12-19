@@ -3,7 +3,7 @@ require 'spec_helper'
 module Industrious
   class DoNothingTask < Task
     def execute
-      return true
+      true
     end
   end
 
@@ -32,6 +32,7 @@ module Industrious
       task_descriptions = state_histories.map { |history| history.task.description }
       expect(task_descriptions).to eq ['First Task', 'Second Task', 'Third Task']
       expect(process.states).to be_empty
+      expect(process.reload.finished).not_to be_nil
     end
   end
 end
