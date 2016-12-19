@@ -7,7 +7,7 @@ module Industrious
 
     describe 'process can be created' do
       subject(:process) do
-        described_class.new(workflow: workflow, data_identifier: 123)
+        described_class.new(workflow: workflow, data_identifier: 123, started: Time.now)
       end
 
       it { is_expected.to be_valid }
