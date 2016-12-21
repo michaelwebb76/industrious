@@ -9,5 +9,7 @@ require 'industrious/process'
 require 'industrious/state'
 require 'industrious/state_history'
 require 'industrious/worker'
+
 require 'industrious/sequence_task'
 require 'industrious/parallel_split_task'
+require 'industrious/synchronization_task'

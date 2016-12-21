@@ -8,12 +8,6 @@ module Industrious
     end
   end
 
-  class ParallelProceedTask < ParallelSplitTask
-    def execute
-      true
-    end
-  end
-
   class FailToExecuteTask < SequenceTask
     def execute
       true
@@ -59,7 +53,7 @@ module Industrious
 
     context 'parallel split with blocker on one branch' do
       before do
-        first_task = ParallelProceedTask.create(description: 'First Task')
+        first_task = ParallelSplitTask.create(description: 'First Task')
         second_task = ProceedTask.create(description: 'Second Task')
         third_task = ProceedTask.create(description: 'Third Task')
         fourth_task = CantExecuteYetTask.create(description: 'Fourth Task')
@@ -78,6 +72,33 @@ module Industrious
         task_descriptions = state_histories.map { |history| history.task.description }
         expect(task_descriptions).to eq ['First Task', 'Second Task', 'Third Task']
         expect(start_process.reload.finished).to be_nil
+      end
+    end
+
+    context 'parallel split with synchronization' do
+      before do
+        first_task = ParallelSplitTask.create(description: 'First Task')
+        second_task = ProceedTask.create(description: 'Second Task')
+        third_task = ProceedTask.create(description: 'Third Task')
+        fourth_task = SynchronizationTask.create(description: 'Fourth Task')
+        fifth_task = ProceedTask.create(description: 'Fifth Task')
+        Sequence.create!(workflow: workflow, from_task: first_task, to_task: second_task)
+        Sequence.create!(workflow: workflow, from_task: second_task, to_task: third_task)
+        Sequence.create!(workflow: workflow, from_task: third_task, to_task: fourth_task)
+        Sequence.create!(workflow: workflow, from_task: first_task, to_task: fourth_task)
+        Sequence.create!(workflow: workflow, from_task: fourth_task, to_task: fifth_task)
+      end
+
+      specify do
+        start_process
+        do_work
+        states = start_process.states.reload
+        expect(states).to be_empty
+        state_histories = start_process.state_histories.order(:started)
+        task_descriptions = state_histories.map { |history| history.task.description }
+        expect(task_descriptions).to eq ['First Task', 'Second Task', 'Fourth Task', 'Third Task',
+                                         'Fifth Task']
+        expect(start_process.reload.finished).not_to be_nil
       end
     end
   end

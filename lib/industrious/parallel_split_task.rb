@@ -4,5 +4,9 @@ module Industrious
     def can_execute?(_)
       true
     end
+
+    def execute
+      true
+    end
   end
 end

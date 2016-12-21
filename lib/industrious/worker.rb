@@ -32,7 +32,7 @@ module Industrious
                            task: task,
                            started: state.created_at,
                            finished: Time.zone.now)
-      state.destroy!
+      states.where(task: task).destroy_all
       update_process_state(task)
     end
 
