@@ -10,7 +10,8 @@ module Industrious
     def work
       prior_states = states.dup
       prior_states.each do |state|
-        executed = state.task.execute
+        task = state.task
+        executed = task.execute if task.can_execute?(process)
         next unless executed
         progress_process_from(state)
         self.work_done = true
@@ -31,8 +32,8 @@ module Industrious
                            task: task,
                            started: state.created_at,
                            finished: Time.zone.now)
-      update_process_state(task)
       state.destroy!
+      update_process_state(task)
     end
 
     def update_process_state(task)
@@ -40,7 +41,7 @@ module Industrious
       next_sequences.each do |sequence|
         states.create!(process: process, task_id: sequence.to_task_id)
       end
-      process.update_attributes(finished: Time.zone.now) if next_sequences.empty?
+      process.update_attributes(finished: Time.zone.now) if states.count.zero?
     end
   end
 end

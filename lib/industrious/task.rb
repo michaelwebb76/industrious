@@ -7,5 +7,9 @@ module Industrious
     def execute
       raise NotImplementedError
     end
+
+    def can_execute?(_)
+      raise NotImplementedError
+    end
   end
 end
